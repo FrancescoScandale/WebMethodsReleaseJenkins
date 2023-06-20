@@ -2,8 +2,8 @@
 
 #INIT
 $ENVIRONMENT= "PRD"
-$PROPERTIES_FILE_NAME = "C:\Users\francesco.scandale\OneDrive - Accenture\Desktop\CICD-Thesis\devops-prod.properties"
-$REPO = "Symphony-Webmethods-EMEA-ES"
+$PROPERTIES_FILE_NAME = "C:\Users\francesco.scandale\Desktop\WebMethodsPackages\devops-prod.properties"
+$REPO = "WebMethodsPackages"
 
 #From the .properties file
 $COUNTRY = "MI"
@@ -41,7 +41,7 @@ $Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
 
 Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
-git clone -b main --single-branch https://github.com/Amplifon-Organization/$REPO.git
+git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 if (!(Test-Path "$BuildSourceDir\$REPO\config")) {
   New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
   $BuildConfigPath = $PROPERTIES["build.config.path"]
