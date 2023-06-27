@@ -10,4 +10,11 @@
   <null name="requires"/>
   <null name="listACL"/>
   <value name="webappLoad">yes</value>
+  <value name="name">Anagrafica</value>
+  <value name="build">10.3.9</value>
+  <null name="description"/>
+  <value name="time">2023-06-27 16:10:16 CEST</value>
+  <value name="jvm_version">11.0.13</value>
+  <value name="publisher">C11-LJ13RVJHSLG.dir.svc.accenture.com</value>
+  <value name="patch_nums"></value>
 </Values>
