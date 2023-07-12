@@ -76,6 +76,5 @@
       </record>
     </array>
     <value name="modifiable">false</value>
-    <value name="LOCK_REQUIRED">true</value>
   </record>
 </Values>

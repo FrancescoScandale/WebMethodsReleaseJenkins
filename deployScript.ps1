@@ -19,6 +19,7 @@ $DeployerUser="Administrator" #this needs to be checked
 $DeployerPwd="manage" #this needs to be checked
 
 
+
 #BUILD
 #clean
 $BuildOutputDir = $PROPERTIES["build.output"]+"\$ENVIRONMENT"
@@ -41,7 +42,8 @@ $Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
 
 Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
-git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
+#git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
+git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 if (!(Test-Path "$BuildSourceDir\$REPO\config")) {
   New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
   $BuildConfigPath = $PROPERTIES["build.config.path"]
@@ -70,7 +72,7 @@ if (-Not (Test-Path $BuildSourceDir)) {
   Throw "The source directory doesn't exist"
 }
 #END OF CHECKS
-$BuildSourceDir2="$BuildSourceDir\$Repo" #SOURCE_DIR
+$BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
 
 #fbuild
 cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
