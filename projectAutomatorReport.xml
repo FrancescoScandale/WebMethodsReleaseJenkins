@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report>
+    <Messages type="INFO">
+        <message deploymentProject="">Deployer Server running on host:port localhost</message>
+        <message deploymentProject="">Deployer Server authenticated using user Administrator</message>
+        <message deploymentProject="">Successfully deleted Repository alias REPOSITORY_WebMethodsPackages</message>
+        <message deploymentProject="">Successfully created Repository REPOSITORY_WebMethodsPackages</message>
+        <message deploymentProject="">Successfully updated Repository REPOSITORY_WebMethodsPackages</message>
+        <message deploymentProject="">Successfully created Repository indexes REPOSITORY_WebMethodsPackages</message>
+        <message deploymentProject="">Deleted remote server WebMethodsPackages_NODE1</message>
+        <message deploymentProject="">Successfully created Integration Server alias WebMethodsPackages_NODE1</message>
+        <message deploymentProject="">Successfully pinged Integration Server Alias WebMethodsPackages_NODE1. Version reported was pong</message>
+        <message deploymentProject="">Listed project on Deployer succesfully</message>
+        <message deploymentProject="">Listed project on Deployer succesfully</message>
+        <message deploymentProject="">Deleted project PROJECT_WebMethodsPackages succesfully</message>
+        <message deploymentProject="">Created project PROJECT_WebMethodsPackages succesfully</message>
+        <message deploymentProject="">Created Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages</message>
+        <message deploymentProject="">Updated Source Server Aliases REPOSITORY_WebMethodsPackages, on Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages</message>
+        <message deploymentProject="">Successfully added Repository Objects REPOSITORY_WebMethodsPackages$IS$WmJDBCAdapter$COMPOSITE_INCL,REPOSITORY_WebMethodsPackages$IS$Default$COMPOSITE_INCL,REPOSITORY_WebMethodsPackages$IS$Anagrafica$COMPOSITE_INCL,null to Deployment Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages</message>
+        <message deploymentProject="">Successfully created map MAP_WebMethodsPackages in project PROJECT_WebMethodsPackages</message>
+        <message deploymentProject="">Added server aliases to the deployment map MAP_WebMethodsPackages in the project PROJECT_WebMethodsPackages</message>
+        <message deploymentProject="">Successfully created deployment candidate CANDIDATE_WebMethodsPackages with map MAP_WebMethodsPackages in project PROJECT_WebMethodsPackages</message>
+    </Messages>
+    <Messages type="ERROR"/>
+</Report>

@@ -78,3 +78,5 @@ $BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
 
 #fbuild
 cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
+
+Set-Location "C:\Users\francesco.scandale\Desktop\WebMethodsPackages" #done to start other scripts right away
