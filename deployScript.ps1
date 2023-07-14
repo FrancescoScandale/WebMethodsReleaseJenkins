@@ -25,10 +25,12 @@ $DeployerPwd="manage" #this needs to be checked
 $BuildOutputDir = $PROPERTIES["build.output"]+"\$ENVIRONMENT"
 $BuildSourceDir = $PROPERTIES["build.source"]+"\$ENVIRONMENT"
 if (Test-Path $BuildOutputDir\*) {
-  Get-ChildItem -Path $BuildOutputDir -Recurse -Force | Remove-Item -Recurse -Force
+  Set-Location $BuildOutputDir
+  Remove-Item -Recurse -Force *
 }
 if (Test-Path $BuildSourceDir\*) {
-  Get-ChildItem -Path $BuildSourceDir -Recurse -Force | Remove-Item -Recurse -Force
+  Set-Location $BuildSourceDir
+  Remove-Item -Recurse -Force *
 }
 
 #preconditions
