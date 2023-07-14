@@ -6,9 +6,9 @@
   <value name="name">Default</value>
   <value name="build">724</value>
   <value name="description"></value>
-  <value name="time">2023-06-27 12:19:58 CEST</value>
-  <value name="jvm_version">11.0.13</value>
-  <value name="publisher">C11-LJ13RVJHSLG.dir.svc.accenture.com</value>
+  <value name="time"></value>
+  <value name="jvm_version">1.8</value>
+  <value name="publisher">Software AG</value>
   <value name="patch_nums"></value>
   <null name="startup_services"/>
   <null name="shutdown_services"/>

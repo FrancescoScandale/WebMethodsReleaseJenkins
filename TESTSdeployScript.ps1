@@ -25,10 +25,14 @@ $DeployerPwd="manage" #this needs to be checked
 $BuildOutputDir = $PROPERTIES["build.output"]+"\$ENVIRONMENT"
 $BuildSourceDir = $PROPERTIES["build.source"]+"\$ENVIRONMENT"
 if (Test-Path $BuildOutputDir\*) {
-  Get-ChildItem -Path $BuildOutputDir -Recurse -Force | Remove-Item -Recurse -Force
+  #Get-ChildItem -Path $BuildOutputDir -Recurse -Force | Remove-Item -Recurse -Force
+  Set-Location $BuildOutputDir
+  Remove-Item -Recurse -Force *
 }
 if (Test-Path $BuildSourceDir\*) {
-  Get-ChildItem -Path $BuildSourceDir -Recurse -Force | Remove-Item -Recurse -Force
+  #Get-ChildItem -Path $BuildSourceDir -Recurse -Force | Remove-Item -Recurse -Force
+  Set-Location $BuildSourceDir
+  Remove-Item -Recurse -Force *
 }
 
 #preconditions
@@ -45,13 +49,18 @@ Set-Location $BuildSourceDir
 #git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 if (!(Test-Path "$BuildSourceDir\$REPO\config")) {
+  Write-Output "creating $REPO\config"
   New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
   $BuildConfigPath = $PROPERTIES["build.config.path"]
   $BuildConfigFiles = $PROPERTIES["build.config.files"]
   $SplitBuildConfigFiles = $BuildConfigFiles -split ","
   foreach ($file in $SplitBuildConfigFiles) {
     Copy-Item "$BuildConfigPath\$file" -Destination "$BuildSourceDir\$REPO\config"
+    Write-Output "Copying file -> $file"
   }
+  #Copy-Item "C:\SoftwareAG\IS\common" -Destination "$BuildSourceDir\$REPO\config" -Recurse
+  #Copy-Item "C:\SoftwareAG\IS\jvm" -Destination "$BuildSourceDir\$REPO\config" -Recurse
+  #Copy-Item "C:\SoftwareAG\IS\IntegrationServer\config\jdbc" -Destination "$BuildSourceDir\$REPO\config" -Recurse
 } else {
   Throw "ERROR: configuration files folder already exists. Check the repository."
 }
@@ -79,3 +88,6 @@ cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$
 
 #archive artifacts
 #here the github action saves the logs and the compiled packages, using upload-artifact
+
+#COMPLETE COMMAND STRING
+#C:\SoftwareAG\IS\common\AssetBuildEnvironment\bin\build.bat -Dbuild.output.dir="C:\SoftwareAG\DeployerFiles\Builds\MI\PRD" -Dbuild.source.dir="C:\SoftwareAG\DeployerFiles\BuildsRepo\git\MI\PRD\WebMethodsPackages" -Dbuild.log.filename="C:\SoftwareAG\DeployerFiles\Builds\MI\PRD\testBUILD.log"
