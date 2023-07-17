@@ -33,6 +33,7 @@ if (Test-Path $BuildSourceDir\*) {
   Remove-Item -Recurse -Force *
 }
 
+Write-Output "BUILD STAGE"
 #preconditions
 if($ENVIRONMENT -ne “PRD”){
 	Write-Output "$ENVIRONMENT error - environment not valid"
@@ -44,7 +45,6 @@ $Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
 
 Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
-#git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 if (!(Test-Path "$BuildSourceDir\$REPO\config")) {
   New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
@@ -85,6 +85,7 @@ cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$
 
 
 #DEPLOY
+Write-Output "DEPLOY STAGE"
 #dpreconditions
 $DeployPathConfig = $PROPERTIES["deploy.config"] + "\$ENVIRONMENT" #path_config
 $UpdateAutomator = $PROPERTIES["deploy.update.automator"]
@@ -183,6 +184,7 @@ cmd.exe /c "$DeployerBat --deploy -dc $Candidate -project $Project -host $Host0 
 
 #CLEANUP
 #clean
+Write-Output "CLEANUP STAGE"
 if (Test-Path $BuildOutputDir\*) {
     Get-ChildItem -Path $BuildOutputDir -Recurse -Force | Remove-Item -Recurse -Force
   }
