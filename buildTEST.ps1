@@ -15,8 +15,6 @@ $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + $TYPEBUILD + "_" + $dat
 
 #NEXT LINES ARE ADDED BY ME
 $PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
-$DeployerUser="Administrator" #this needs to be checked
-$DeployerPwd="manage" #this needs to be checked
 
 
 
@@ -46,6 +44,8 @@ Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
 #git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
+
+#copy just the config files needed
 #if (!(Test-Path "$BuildSourceDir\$REPO\config")) { #LA COLPA è DI QUESTE CONFIG!
   #New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
   #$BuildConfigPath = $PROPERTIES["build.config.path"]
@@ -57,6 +57,12 @@ git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 #} else {
   #Throw "ERROR: configuration files folder already exists. Check the repository."
 #}
+
+#if instead you want to copy the whole config folder...
+#New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
+#$BuildConfigPath = $PROPERTIES["build.config.path"]
+#Copy-Item "$BuildConfigPath\*" -Destination "$BuildSourceDir\$REPO\config" -Recurse
+
 #CHECKS ... from row 163 to 222 (end of step)
 Write-Output "--CHECK 'BAT SCRIPT' VARIABLE--"
 if (-Not (Test-Path "$BuildScript")) {
