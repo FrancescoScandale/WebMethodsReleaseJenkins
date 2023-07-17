@@ -1,6 +1,7 @@
 #set of all the commands that need to be done in order to deploy 
 
 #INIT
+$CURRENTPATH = Get-Location
 $ENVIRONMENT= "PRD"
 $PROPERTIES_FILE_NAME = "C:\Users\francesco.scandale\Desktop\WebMethodsPackages\devops-prod.properties"
 $REPO = "WebMethodsPackages"
@@ -186,8 +187,12 @@ cmd.exe /c "$DeployerBat --deploy -dc $Candidate -project $Project -host $Host0 
 #clean
 Write-Output "CLEANUP STAGE"
 if (Test-Path $BuildOutputDir\*) {
-    Get-ChildItem -Path $BuildOutputDir -Recurse -Force | Remove-Item -Recurse -Force
-  }
-  if (Test-Path $BuildSourceDir\*) {
-    Get-ChildItem -Path $BuildSourceDir -Recurse -Force | Remove-Item -Recurse -Force
-  }
+  Set-Location $BuildOutputDir
+  Remove-Item -Recurse -Force *
+}
+if (Test-Path $BuildSourceDir\*) {
+  Set-Location $BuildSourceDir
+  Remove-Item -Recurse -Force *
+}
+
+Set-Location $CURRENTPATH #go back to the original directory
