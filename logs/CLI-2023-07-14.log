@@ -1,0 +1,267 @@
+[ INFO] [14 Jul 2023 17:35:28,617] (MainClass.java:main:168)
+No of command line arguments = 5
+
+[ INFO] [14 Jul 2023 17:35:28,622] (MainClass.java:main:170)
+Argument 0 = C:\SoftwareAG\DeployerFiles\Deploy\deployer\MI\PRD\Deployment_ProjectAutomator.xml
+
+[ INFO] [14 Jul 2023 17:35:28,624] (MainClass.java:main:170)
+Argument 1 = C:\SoftwareAG\DeployerFiles\Deploy\deployer\MI\PRD\logs\automator_MI_PRD_full_202307141735.log
+
+[ INFO] [14 Jul 2023 17:35:28,631] (MainClass.java:main:170)
+Argument 2 = C:\SoftwareAG\IS\IntegrationServer\instances\thesis_MI\packages\WmDeployer\bin\\..\config\ProjectAutomatorForRuntime.xsd
+
+[ INFO] [14 Jul 2023 17:35:28,631] (MainClass.java:main:170)
+Argument 3 = C:\SoftwareAG\IS\IntegrationServer\instances\thesis_MI\packages\WmDeployer\bin\\..\config\ProjectAutomatorForRepository.xsd
+
+[ INFO] [14 Jul 2023 17:35:28,633] (MainClass.java:main:170)
+Argument 4 = 1
+
+[ INFO] [14 Jul 2023 17:35:28,651] (MainClass.java:main:198)
+Operating System on which ProjectAutomator is running is a WINDOWS or a WINDOWS Variant
+
+[ INFO] [14 Jul 2023 17:35:28,652] (MainClass.java:main:212)
+Path to XML project definition file : C:\SoftwareAG\DeployerFiles\Deploy\deployer\MI\PRD\Deployment_ProjectAutomator.xml
+
+[ INFO] [14 Jul 2023 17:35:28,662] (MainClass.java:<init>:46)
+Started Operation of Deployer Test Suite
+
+[ INFO] [14 Jul 2023 17:35:30,402] (KeyObfuscator.java:decryptAndUnobfuscate:162)
+Successfully retrieved the key from the given obfuscated file.
+
+[ INFO] [14 Jul 2023 17:35:30,429] (KeyObfuscator.java:decryptAndUnobfuscate:162)
+Successfully retrieved the key from the given obfuscated file.
+
+[ INFO] [14 Jul 2023 17:35:30,677] (ProjectPlanExecutorXMLParser.java:getDeployerServerDetails:467)
+Using WmDeployer package on the Server localhost configured with the user Administrator
+
+[DEBUG] [14 Jul 2023 17:35:30,680] (ServerAlias.java:doesServerAliasExist:92)
+Checking if the  Server Alias REPOSITORY_WebMethodsPackages of pluginType Repository exists.
+
+[DEBUG] [14 Jul 2023 17:35:31,031] (DeployerUtil.java:createRepositoryServerAliases:1322)
+Deleting Repository Server Alias REPOSITORY_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:31,121] (DeployerUtil.java:createRepositoryServerAliases:1324)
+Deleted Repository Server Alias REPOSITORY_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:31,122] (DeployerUtil.java:createRepositoryServerAliases:1326)
+Creating Repository Server Alias : aliasName = REPOSITORY_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:31,168] (DeployerUtil.java:createRepositoryServerAliases:1328)
+Created Repository Server Alias Alias : aliasName = REPOSITORY_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:31,169] (DeployerUtil.java:createRepositoryServerAliases:1330)
+Creating Repository Indexes : aliasName = REPOSITORY_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:31,801] (DeployerUtil.java:createRepositoryServerAliases:1332)
+Created Repository Indexes : aliasName = REPOSITORY_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:31,806] (ServerAlias.java:doesServerAliasExist:92)
+Checking if the  Server Alias WebMethodsPackages_NODE1 of pluginType IS&TN exists.
+
+[DEBUG] [14 Jul 2023 17:35:31,874] (DeployerUtil.java:createISServerAliases:214)
+Deleting IS Alias : aliasName = WebMethodsPackages_NODE1@localhost:5561
+
+[ INFO] [14 Jul 2023 17:35:32,123] (DeployerUtil.java:createISServerAliases:217)
+Deleted IS Alias : aliasName = WebMethodsPackages_NODE1@localhost:5561
+
+[DEBUG] [14 Jul 2023 17:35:32,126] (DeployerUtil.java:createISServerAliases:220)
+Creating IS Alias : aliasName = WebMethodsPackages_NODE1@localhost:5561 with the user Administrator
+
+[ INFO] [14 Jul 2023 17:35:32,274] (KeyObfuscator.java:decryptAndUnobfuscate:162)
+Successfully retrieved the key from the given obfuscated file.
+
+[ INFO] [14 Jul 2023 17:35:32,330] (KeyObfuscator.java:decryptAndUnobfuscate:162)
+Successfully retrieved the key from the given obfuscated file.
+
+[ INFO] [14 Jul 2023 17:35:32,834] (DeployerUtil.java:createISServerAliases:242)
+Created IS Alias : aliasName = WebMethodsPackages_NODE1@localhost:5561 with the user Administrator
+
+[ INFO] [14 Jul 2023 17:35:32,835] (DeployerUtil.java:createISServerAliases:246)
+Pinging IS Server Alias WebMethodsPackages_NODE1
+
+[DEBUG] [14 Jul 2023 17:35:32,838] (ISServerAlias.java:ping:383)
+Pinging  IS Server Alias WebMethodsPackages_NODE1 
+
+[DEBUG] [14 Jul 2023 17:35:33,645] (ISServerAlias.java:ping:400)
+Successfully pinged WebMethodsPackages_NODE1. pong
+
+[ INFO] [14 Jul 2023 17:35:33,645] (DeployerUtil.java:createISServerAliases:252)
+Successfully pinged Server Alias WebMethodsPackages_NODE1.
+
+[ INFO] [14 Jul 2023 17:35:34,168] (RepoAssetUtil.java:getRepositoryComposite:288)
+Adding asset Anagrafica from srcAlias=REPOSITORY_WebMethodsPackages to Deployment Set SET_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:34,169] (RepoAssetUtil.java:getRepositoryComposite:291)
+REPOSITORY_WebMethodsPackages$IS$Anagrafica$COMPOSITE_INCL
+
+[ INFO] [14 Jul 2023 17:35:34,174] (RepoAssetUtil.java:getRepositoryComposite:288)
+Adding asset Default from srcAlias=REPOSITORY_WebMethodsPackages to Deployment Set SET_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:34,180] (RepoAssetUtil.java:getRepositoryComposite:291)
+REPOSITORY_WebMethodsPackages$IS$Default$COMPOSITE_INCL
+
+[ INFO] [14 Jul 2023 17:35:34,180] (RepoAssetUtil.java:getRepositoryComposite:288)
+Adding asset WmJDBCAdapter from srcAlias=REPOSITORY_WebMethodsPackages to Deployment Set SET_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:34,181] (RepoAssetUtil.java:getRepositoryComposite:291)
+REPOSITORY_WebMethodsPackages$IS$WmJDBCAdapter$COMPOSITE_INCL
+
+[DEBUG] [14 Jul 2023 17:35:34,185] (ProjectPlanExecutorXMLParser.java:getProjectDetails:627)
+Deleting Project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:34,843] (ProjectPlanExecutorXMLParser.java:getProjectDetails:630)
+Deleted Project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:34,844] (ProjectPlanExecutorXMLParser.java:getProjectDetails:632)
+Creating Project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:35,239] (ProjectPlanExecutorXMLParser.java:getProjectDetails:634)
+Created Project PROJECT_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:35,240] (DeploymentSet.java:create:189)
+Creating Deployment Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:35,346] (DeploymentSet.java:create:218)
+Created Deployment Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:35,347] (DeploymentSet.java:updateSourceServerAliasToSets:388)
+Updating Source Server Aliases on Deployment Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:35,629] (DeploymentSet.java:updateSourceServerAliasToSets:433)
+Updated Source Server Aliases on Deployment Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:35,630] (DeploymentSet.java:addRepoCompositesToDeploymentSet:2875)
+Adding Repository Objects to Deployment Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:35,988] (DeploymentSet.java:addRepoCompositesToDeploymentSet:2904)
+Added Repository Objects to Deployment Set SET_WebMethodsPackages of type Repository for project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:36,569] (DeploymentMap.java:create:70)
+Creating Deployment Map MAP_WebMethodsPackages in Project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:36,626] (DeploymentMap.java:create:90)
+Successfully created Deployment Map MAP_WebMethodsPackages in Project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:36,715] (DeploymentCandidate.java:create:87)
+Creating Deployment Candidate CANDIDATE_WebMethodsPackages with Deployment Map MAP_WebMethodsPackages for project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:36,920] (DeploymentCandidate.java:create:115)
+Successfully created Deployment Candidate CANDIDATE_WebMethodsPackages with Deployment Map MAP_WebMethodsPackages for project PROJECT_WebMethodsPackages
+
+[ INFO] [14 Jul 2023 17:35:37,095] (XMLReport.java:runExample:41)
+Started Generating Report ... 
+
+[ INFO] [14 Jul 2023 17:35:37,097] (XMLReport.java:createDOMTree:88)
+Info Messages Size = 19
+
+[ INFO] [14 Jul 2023 17:35:37,100] (XMLReport.java:createDOMTree:89)
+Error Messages Size = 0
+
+[ INFO] [14 Jul 2023 17:35:37,151] (XMLReport.java:runExample:44)
+Generated Automation Test Suite Report file successfully.
+
+[DEBUG] [14 Jul 2023 17:35:39,478] (ParseDeployerParams.java:parse:74)
+[Deployer] Entering parse(String[] args) Method
+
+[ INFO] [14 Jul 2023 17:35:39,538] (ParseDeployerParams.java:parse:1951)
+[[DEP.0100.5.56] Operation] [DEP.0100.5.23] Deploy Deployment Candidate
+
+[DEBUG] [14 Jul 2023 17:35:39,541] (ParseDeployerParams.java:validateCommandLineParametersForAction:2575)
+[Deployer] Entering validateCommandLineParametersForAction(Args arg,	CommandLineParser parser)
+
+[DEBUG] [14 Jul 2023 17:35:39,546] (ParseDeployerParams.java:validateCommandLineParametersForAction:2886)
+[Deployer] [Param Authentication] 
+
+[DEBUG] [14 Jul 2023 17:35:39,551] (ParseDeployerParams.java:validateCommandLineParametersForAction:2889)
+[Deployer] [Config File Parameters]isUserSpecifiedinConfigFile = false
+
+[DEBUG] [14 Jul 2023 17:35:39,552] (ParseDeployerParams.java:validateCommandLineParametersForAction:2892)
+[Deployer] [Config File Parameters]isPasswordSpecifiedinConfigFile = false
+
+[DEBUG] [14 Jul 2023 17:35:39,564] (ParseDeployerParams.java:validateCommandLineParametersForAction:2894)
+[Deployer] Operation invoked by User Administrator on Deployer localhost:5556
+
+[DEBUG] [14 Jul 2023 17:35:39,579] (ParseDeployerParams.java:printParamMap:5183)
+[Deployer][ParamMap] Key = port Value = 5556
+
+[DEBUG] [14 Jul 2023 17:35:39,582] (ParseDeployerParams.java:printParamMap:5183)
+[Deployer][ParamMap] Key = host Value = localhost
+
+[DEBUG] [14 Jul 2023 17:35:39,583] (ParseDeployerParams.java:printParamMap:5183)
+[Deployer][ParamMap] Key = action Value = deploy
+
+[DEBUG] [14 Jul 2023 17:35:39,585] (ParseDeployerParams.java:printParamMap:5180)
+[Deployer][ParamMap] Key = pwd.Value present but not shown.
+
+[DEBUG] [14 Jul 2023 17:35:39,586] (ParseDeployerParams.java:printParamMap:5183)
+[Deployer][ParamMap] Key = user Value = Administrator
+
+[ INFO] [14 Jul 2023 17:35:39,588] (ParseDeployerParams.java:validateCommandLineParametersForAction:4040)
+[[DEP.0100.5.56] Operation] [DEP.0100.5.23] Deploy Deployment Candidate
+
+[DEBUG] [14 Jul 2023 17:35:39,591] (ParseDeployerParams.java:validateCommandLineParametersForAction:5150)
+[Deployer] Exiting validateCommandLineParametersForAction(Args arg,	CommandLineParser parser)
+
+[DEBUG] [14 Jul 2023 17:35:39,631] (DeployerServiceUtils.java:deployAction:657)
+[Deployer] Entering deployAction(HashMap paramMap) Method
+
+[DEBUG] [14 Jul 2023 17:35:39,638] (DeployerServiceUtils.java:deployAction:660)
+[Deployer] Invoking Service wm.deployer.UIDeployer.deployToTargets on Deployer localhost:5556
+
+[DEBUG] [14 Jul 2023 17:35:39,640] (DeployerServiceUtils.java:deployAction:666)
+[Deployer] Service invoked by User Administrator
+
+[DEBUG] [14 Jul 2023 17:35:39,646] (DeployerServiceUtils.java:deployAction:668)
+[Deployer] Parameters to the service 
+
+[DEBUG] [14 Jul 2023 17:35:39,690] (DeployerServiceUtils.java:deployAction:680)
+[Deployer] 	project = PROJECT_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:39,699] (DeployerServiceUtils.java:deployAction:680)
+[Deployer] 	deploymentName = CANDIDATE_WebMethodsPackages
+
+[DEBUG] [14 Jul 2023 17:35:39,702] (DeployerServiceUtils.java:deployAction:680)
+[Deployer] 	preDeployString = false
+
+[DEBUG] [14 Jul 2023 17:35:39,710] (DeployerServiceUtils.java:deployAction:680)
+[Deployer] 	force = false
+
+[DEBUG] [14 Jul 2023 17:35:39,723] (DeployerServiceUtils.java:deployAction:680)
+[Deployer] 	reportFilePath = null
+
+[DEBUG] [14 Jul 2023 17:35:39,731] (DeployerServiceUtils.java:executeService:1484)
+[Deployer] Entering executeService(String server, String user, String pwd, String packageStr, String service,IData inputDocument) Method
+
+[DEBUG] [14 Jul 2023 17:35:41,092] (DeployerServiceUtils.java:executeService:1545)
+[Deployer] Initiating connection Secure Socket Layer = false
+
+[DEBUG] [14 Jul 2023 17:35:41,257] (DeployerServiceUtils.java:executeService:1547)
+[Deployer] Connection Established Secure Socket Layer = false
+
+[DEBUG] [14 Jul 2023 17:35:41,258] (DeployerServiceUtils.java:executeService:1549)
+[Deployer] Executing Service wm.deployer.UIDeployer:deployToTargets Secure Socket Layer = false
+
+[DEBUG] [14 Jul 2023 17:35:52,385] (DeployerServiceUtils.java:executeService:1551)
+[Deployer] Completed Executing Service wm.deployer.UIDeployer:deployToTargets Secure Socket Layer = false
+
+[DEBUG] [14 Jul 2023 17:35:52,393] (DeployerServiceUtils.java:executeService:1587)
+[Deployer] Exiting executeService(String server, String user, String pwd, String packageStr, String service,IData inputDocument) Method
+
+[DEBUG] [14 Jul 2023 17:35:52,394] (DeployerServiceUtils.java:deployAction:701)
+[Deployer Service Status] Stature returned with status success
+
+[DEBUG] [14 Jul 2023 17:35:52,399] (DeployerServiceUtils.java:deployAction:714)
+[Deployer Service Status] Message = [DEP.0005.0201] Deployment succeeded
+
+[DEBUG] [14 Jul 2023 17:35:52,400] (DeployerServiceUtils.java:deployAction:726)
+[Deployer] Exiting deployAction(HashMap paramMap) Method
+
+[DEBUG] [14 Jul 2023 17:35:52,401] (ParseDeployerParams.java:addStatusRecordToReport:5157)
+[Deployer] Entering addStatusRecordToReport(int errorCode, String message, boolean isUsageRecord) Method
+
+[DEBUG] [14 Jul 2023 17:35:52,405] (ParseDeployerParams.java:addStatusRecordToReport:5168)
+[Deployer] Exiting addStatusRecordToReport(int errorCode, String message, boolean isUsageRecord) Method
+
+[ INFO] [14 Jul 2023 17:35:52,409] (ParseDeployerParams.java:parse:1967)
+[[DEP.0100.4.00] Success0] [DEP.0005.0201] Deployment succeeded
+

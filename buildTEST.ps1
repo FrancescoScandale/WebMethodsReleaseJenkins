@@ -43,7 +43,7 @@ $Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
 Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
 #git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
-git clone -b lessPackages --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
+git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 
 #copy just the config files needed
 if (!(Test-Path "$BuildSourceDir\$REPO\config")) { #LA COLPA è DI QUESTE CONFIG!
