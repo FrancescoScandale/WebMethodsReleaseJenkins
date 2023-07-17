@@ -6,7 +6,7 @@
   <!-- nodes -->
 
 <MAP TIMEOUT="" MODE="STANDALONE">
-  <COMMENT>new comment</COMMENT>
+  <COMMENT>Testing the new scripts</COMMENT>
 </MAP>
 
 <INVOKE TIMEOUT="" SERVICE="pub.flatFile:convertToString" VALIDATE-IN="$none" VALIDATE-OUT="$none">
