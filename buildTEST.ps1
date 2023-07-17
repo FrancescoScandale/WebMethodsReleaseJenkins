@@ -43,20 +43,20 @@ $Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
 Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
 #git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
-git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
+git clone -b lessPackages --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 
 #copy just the config files needed
-#if (!(Test-Path "$BuildSourceDir\$REPO\config")) { #LA COLPA è DI QUESTE CONFIG!
-  #New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
-  #$BuildConfigPath = $PROPERTIES["build.config.path"]
-  #$BuildConfigFiles = $PROPERTIES["build.config.files"]
-  #$SplitBuildConfigFiles = $BuildConfigFiles -split ","
-  #foreach ($file in $SplitBuildConfigFiles) {
-    #Copy-Item "$BuildConfigPath\$file" -Destination "$BuildSourceDir\$REPO\config"
-  #}
-#} else {
-  #Throw "ERROR: configuration files folder already exists. Check the repository."
-#}
+if (!(Test-Path "$BuildSourceDir\$REPO\config")) { #LA COLPA è DI QUESTE CONFIG!
+  New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
+  $BuildConfigPath = $PROPERTIES["build.config.path"]
+  $BuildConfigFiles = $PROPERTIES["build.config.files"]
+  $SplitBuildConfigFiles = $BuildConfigFiles -split ","
+  foreach ($file in $SplitBuildConfigFiles) {
+    Copy-Item "$BuildConfigPath\$file" -Destination "$BuildSourceDir\$REPO\config"
+  }
+} else {
+  Throw "ERROR: configuration files folder already exists. Check the repository."
+}
 
 #if instead you want to copy the whole config folder...
 #New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
