@@ -1,8 +1,11 @@
-#set of all the commands that need to be done in order to deploy 
+#!pwsh
+#SCRIPT TO BUILD AND DEPLOY A FULL RELEASE 
 
 #INIT
+$CURRENTPATH = Get-Location
 $ENVIRONMENT= "PRD"
 $PROPERTIES_FILE_NAME = "C:\Users\francesco.scandale\Desktop\WebMethodsPackages\devops-prod.properties"
+$REPO = "WebMethodsPackages"
 
 #From the .properties file
 $COUNTRY = "MI"
@@ -12,15 +15,77 @@ $date = Get-Date -UFormat '%Y%m%d%H%M'
 #cicd step
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + $TYPEBUILD + "_" + $date
 
-#NEXT LINES ARE ADDED BY ME
+#useful variables
 $PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
 $DeployerUser="Administrator" #this needs to be checked
 $DeployerPwd="manage" #this needs to be checked
 
 
 
+#BUILD
+#clean
+$BuildOutputDir = $PROPERTIES["build.output"]+"\$ENVIRONMENT"
+$BuildSourceDir = $PROPERTIES["build.source"]+"\$ENVIRONMENT"
+if (Test-Path $BuildOutputDir\*) {
+  Set-Location $BuildOutputDir
+  Remove-Item -Recurse -Force *
+}
+if (Test-Path $BuildSourceDir\*) {
+  Set-Location $BuildSourceDir
+  Remove-Item -Recurse -Force *
+}
+
+Write-Output "BUILD STAGE"
+#preconditions
+if($ENVIRONMENT -ne “PRD”){
+	Write-Output "$ENVIRONMENT error - environment not valid"
+	Throw Exception
+}
+
+$BuildScript = $PROPERTIES["build.script"]
+$Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
+
+Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
+Set-Location $BuildSourceDir
+git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
+if (!(Test-Path "$BuildSourceDir\$REPO\config")) {
+  New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
+  $BuildConfigPath = $PROPERTIES["build.config.path"]
+  $BuildConfigFiles = $PROPERTIES["build.config.files"]
+  $SplitBuildConfigFiles = $BuildConfigFiles -split ","
+  foreach ($file in $SplitBuildConfigFiles) {
+    Copy-Item "$BuildConfigPath\$file" -Destination "$BuildSourceDir\$REPO\config"
+  }
+} else {
+  Throw "ERROR: configuration files folder already exists. Check the repository."
+}
+#CHECKS
+Write-Output "--CHECK 'BAT SCRIPT' VARIABLE--"
+if (-Not (Test-Path "$BuildScript")) {
+  Write-Output "Error: 'build.bat' script doesn't exist"
+  Throw "'build.bat' script doesn't exist"
+}
+Write-Output "--CHECK 'OUTPUT DIRECTORY' VARIABLE--"
+if (-Not (Test-Path $BuildOutputDir)) {
+  Write-Output "Error: The output directory doesn't exist"
+  Throw "The output directory doesn't exist"
+}
+Write-Output "--CHECK 'SOURCE DIRECTORY' VARIABLE--"
+if (-Not (Test-Path $BuildSourceDir)) {
+  Write-Output "Error: The source directory doesn't exist"
+  Throw "The source directory doesn't exist"
+}
+#END OF CHECKS
+$BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
+
+#fbuild
+cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
+
+
+
 #DEPLOY
-#dpreconditions
+Write-Output "DEPLOY STAGE"
+#preconditions
 $DeployPathConfig = $PROPERTIES["deploy.config"] + "\$ENVIRONMENT" #path_config
 $UpdateAutomator = $PROPERTIES["deploy.update.automator"]
 $UpdateAutomator = $UpdateAutomator.replace('{{_COUNTRY_}}', "$COUNTRY")
@@ -32,7 +97,7 @@ $ProjectBat = "$DeployPath\projectautomator.bat"
 $DeployerBat = "$DeployPath\Deployer.bat"
 $aLog = "$DeployPathConfig\logs\automator_$CICD_IDENTIFIER.log"
 $dLog = "$DeployPathConfig\logs\deploy_$CICD_IDENTIFIER.log"
-#CHECKS ... from row 420 to 453 (end of step) ...
+#CHECKS
 Write-Output "--CHECK 'ANT BAT SCRIPT' VARIABLE--"
 if (-Not (Test-Path -Path $AntBat)) {
   Write-Output "Error: file $AntBat does NOT exist."
@@ -72,7 +137,7 @@ $Host0 = $HostValue[1].Trim()
 $PortKeyvalue = Select-String -Path $ConfigProperties -pattern "local.port" -CaseSensitive
 $PortValue = $PortKeyvalue -split "="
 $Port0 = $PortValue[1].Trim()
-#CHECKS ... from row 454 to 498 (end of step) ...
+#CHECKS
 Write-Output "PROPERTIES CHECK"
 Write-Output "-----------------"
 if (-not (Test-Path -Path $ConfigProperties)) {
@@ -111,5 +176,18 @@ cmd.exe /c "$ProjectBat $ProjectAutomator $aLog"
 #packages deploy
 cmd.exe /c "$DeployerBat --deploy -dc $Candidate -project $Project -host $Host0 -port $Port0 -user $DeployerUser -pwd $DeployerPwd $dLog"
 
-#archive artifacts
-#here the github action saves the logs, using upload-artifact
+
+
+#CLEANUP
+#clean
+Write-Output "CLEANUP STAGE"
+if (Test-Path $BuildOutputDir\*) {
+  Set-Location $BuildOutputDir
+  Remove-Item -Recurse -Force *
+}
+if (Test-Path $BuildSourceDir\*) {
+  Set-Location $BuildSourceDir
+  Remove-Item -Recurse -Force *
+}
+
+Set-Location $CURRENTPATH #go back to the original directory

@@ -1,4 +1,5 @@
-#set of all the commands that need to be done in order to deploy 
+#!pwsh
+#SCRIPT TO BUILD A FULL RELEASE 
 
 #INIT
 $ENVIRONMENT= "PRD"
@@ -13,9 +14,8 @@ $date = Get-Date -UFormat '%Y%m%d%H%M'
 #cicd step
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + $TYPEBUILD + "_" + $date
 
-#NEXT LINES ARE ADDED BY ME
+#useful variables
 $PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
-
 
 
 #BUILD
@@ -31,6 +31,7 @@ if (Test-Path $BuildSourceDir\*) {
   Remove-Item -Recurse -Force *
 }
 
+Write-Output "BUILD STAGE"
 #preconditions
 if($ENVIRONMENT -ne “PRD”){
 	Write-Output "$ENVIRONMENT error - environment not valid"
@@ -42,11 +43,8 @@ $Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
 
 Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
-#git clone -b main --single-branch https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
 git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
-
-#copy just the config files needed
-if (!(Test-Path "$BuildSourceDir\$REPO\config")) { #LA COLPA è DI QUESTE CONFIG!
+if (!(Test-Path "$BuildSourceDir\$REPO\config")) {
   New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
   $BuildConfigPath = $PROPERTIES["build.config.path"]
   $BuildConfigFiles = $PROPERTIES["build.config.files"]
@@ -57,13 +55,7 @@ if (!(Test-Path "$BuildSourceDir\$REPO\config")) { #LA COLPA è DI QUESTE CONFIG
 } else {
   Throw "ERROR: configuration files folder already exists. Check the repository."
 }
-
-#if instead you want to copy the whole config folder...
-#New-Item -Path "$BuildSourceDir\$REPO\config" -ItemType Directory -Force
-#$BuildConfigPath = $PROPERTIES["build.config.path"]
-#Copy-Item "$BuildConfigPath\*" -Destination "$BuildSourceDir\$REPO\config" -Recurse
-
-#CHECKS ... from row 163 to 222 (end of step)
+#CHECKS
 Write-Output "--CHECK 'BAT SCRIPT' VARIABLE--"
 if (-Not (Test-Path "$BuildScript")) {
   Write-Output "Error: 'build.bat' script doesn't exist"
@@ -84,5 +76,3 @@ $BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
 
 #fbuild
 cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
-
-Set-Location "C:\Users\francesco.scandale\Desktop\WebMethodsPackages" #done to start other scripts right away
