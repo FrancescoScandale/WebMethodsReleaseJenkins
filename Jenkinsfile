@@ -19,16 +19,17 @@ pipeline {
                 echo 'FINISHED PROJECT DEPLOY'
             }
         }
-    }
 
-    post {
-        success {
-            script {
+        stage('Clean') {
+            steps {
                 echo 'STARTING PROJECT CLEAN'
                 pwsh '.\\clean.ps1'
                 echo 'FINISHED PROJECT CLEAN'
             }
         }
+    }
+
+    post {
         failure {
             def failingStage = currentBuild.currentExecutable.displayName
             mail body: 'Jenkins $failingStage step has failed. Check the logs for further details.', subject: 'Jenkins $failingStage FAILED', to: 'frascan@hotmail.it'
