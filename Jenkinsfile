@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'STARTING PROJECT BUILD'
-                pwsh '.\build.ps1'
+                pwsh '.\\build.ps1'
                 echo 'FINISHED PROJECT BUILD'
             }
         }
