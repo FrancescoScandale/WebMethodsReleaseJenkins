@@ -18,11 +18,6 @@ pipeline {
                 pwsh '.\\deploy.ps1'
                 echo 'FINISHED PROJECT DEPLOY'
             }
-            post {
-                failure {
-                    mail body: 'Jenkins deploy step has failed. Check the logs for further details.', subject: 'Jenkins deploy FAILED', to: 'frascan@hotmail.it'
-                }
-            }
         }
     }
 
@@ -35,7 +30,8 @@ pipeline {
             }
         }
         failure {
-            mail body: 'Jenkins build step has failed. Check the logs for further details.', subject: 'Jenkins Build FAILED', to: 'frascan@hotmail.it'
+            def failingStage = currentBuild.currentExecutable.displayName
+            mail body: 'Jenkins $failingStage step has failed. Check the logs for further details.', subject: 'Jenkins $failingStage FAILED', to: 'frascan@hotmail.it'
         }
     }
 }
