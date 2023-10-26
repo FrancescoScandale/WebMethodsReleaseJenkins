@@ -28,12 +28,10 @@ pipeline {
 
     post {
         success {
-            stage('Clean') {
-                steps {
-                    echo 'STARTING PROJECT CLEAN'
-                    pwsh '.\\clean.ps1'
-                    echo 'FINISHED PROJECT CLEAN'
-                }
+            script {
+                echo 'STARTING PROJECT CLEAN'
+                pwsh '.\\clean.ps1'
+                echo 'FINISHED PROJECT CLEAN'
             }
         }
         failure {
