@@ -6,7 +6,7 @@
   <!-- nodes -->
 
 <MAP TIMEOUT="" MODE="STANDALONE">
-  <COMMENT>test error handling 1</COMMENT>
+  <COMMENT>test error handling n</COMMENT>
 </MAP>
 
 <INVOKE TIMEOUT="" SERVICE="pub.flatFile:convertToString" VALIDATE-IN="$none" VALIDATE-OUT="$none">
@@ -15,7 +15,7 @@
   <!-- nodes -->
 
 <MAP MODE="INPUT">
-  <MAPTARGET>
+  <MAPTARG>
 
 <Values version="2.0">
   <record name="xml" javaclass="com.wm.util.Values">
@@ -79,7 +79,7 @@
         <value name="field_type">string</value>
         <value name="field_dim">0</value>
         <value name="field_opt">true</value>
-        <array name="field_options" type="value" depth="1">
+        <a=1>
           <value>false</value>
           <value>true</value>
         </array>
