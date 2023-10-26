@@ -8,28 +8,34 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                FAILED_STAGE = 'Build'
-                echo 'STARTING PROJECT BUILD'
-                pwsh '.\\build.ps1'
-                echo 'FINISHED PROJECT BUILD'
+                script {
+                    FAILED_STAGE = 'Build'
+                    echo 'STARTING PROJECT BUILD'
+                    pwsh '.\\build.ps1'
+                    echo 'FINISHED PROJECT BUILD'
+                }
             }
         }
         
         stage('Deploy') {
             steps {
-                FAILED_STAGE = 'Deploy'
-                echo 'STARTING PROJECT DEPLOY'
-                pwsh '.\\deploy.ps1'
-                echo 'FINISHED PROJECT DEPLOY'
+                script {
+                    FAILED_STAGE = 'Deploy'
+                    echo 'STARTING PROJECT DEPLOY'
+                    pwsh '.\\deploy.ps1'
+                    echo 'FINISHED PROJECT DEPLOY'
+                }
             }
         }
 
         stage('Clean') {
             steps {
-                FAILED_STAGE = 'Clean'
-                echo 'STARTING PROJECT CLEAN'
-                pwsh '.\\clean.ps1'
-                echo 'FINISHED PROJECT CLEAN'
+                script {
+                    FAILED_STAGE = 'Clean'
+                    echo 'STARTING PROJECT CLEAN'
+                    pwsh '.\\clean.ps1'
+                    echo 'FINISHED PROJECT CLEAN'
+                }
             }
         }
     }
