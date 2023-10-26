@@ -43,6 +43,7 @@ pipeline {
     post {
         failure {
             script {
+                echo 'SENDING EMAIL NOTIFICATION ABOUT FAILURE'
                 mail body: "Jenkins ${FAILED_STAGE} step has failed. Check the logs for further details.", subject: "Jenkins ${FAILED_STAGE} FAILED", to: 'frascan@hotmail.it'
             }
         }
