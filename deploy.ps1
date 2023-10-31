@@ -8,7 +8,7 @@ $PROPERTIES_FILE_NAME = "C:\Users\francesco.scandale\Desktop\WebMethodsPackages\
 #From the .properties file
 $COUNTRY = "MI"
 $TYPEBUILD = "full"
-$date = Get-Date -UFormat '%Y%m%d%H%M'
+$date = Get-Date -UFormat '%Y%m%d%H'
 
 #cicd step
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + $TYPEBUILD + "_" + $date
