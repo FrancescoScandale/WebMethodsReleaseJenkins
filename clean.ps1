@@ -3,7 +3,7 @@
 
 #INIT
 $ENVIRONMENT= "PRD"
-$PROPERTIES_FILE_NAME = "C:\Users\francesco.scandale\Desktop\WebMethodsPackages\devops-prod.properties"
+$PROPERTIES_FILE_NAME = "devops.properties"
 $PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
 
 #CLEAN

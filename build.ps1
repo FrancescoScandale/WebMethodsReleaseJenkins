@@ -3,7 +3,7 @@
 
 #INIT
 $ENVIRONMENT= "PRD"
-$PROPERTIES_FILE_NAME = "devops-prod.properties"
+$PROPERTIES_FILE_NAME = "devops.properties"
 $REPO = "WebMethodsPackages"
 
 #From the .properties file
