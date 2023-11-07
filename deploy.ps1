@@ -7,11 +7,10 @@ $PROPERTIES_FILE_NAME = "devops.properties"
 
 #From the .properties file
 $COUNTRY = "MI"
-$TYPEBUILD = "full"
 $date = Get-Date -UFormat '%Y%m%d%H'
 
 #cicd step
-$CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + $TYPEBUILD + "_" + $date
+$CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + "_" + $date
 
 #useful variables
 $PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
