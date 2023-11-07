@@ -1,3 +1,3 @@
 # WebMethodsPackages
 
-Test repo with WebMethods packages used for doing deployment tests.
+Template repo with WebMethods packages used for doing deployment tests.
