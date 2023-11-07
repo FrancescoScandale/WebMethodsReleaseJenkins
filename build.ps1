@@ -74,4 +74,5 @@ if (-Not (Test-Path $BuildSourceDir)) {
 $BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
 
 #fbuild
-cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
+#cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
+Start-Process -FilePath $BuildScript -ArgumentList "-Dbuild.output.dir=$BuildOutputDir", "-Dbuild.source.dir=$BuildSourceDir2", "-Dbuild.log.fileName=$Log" -Wait

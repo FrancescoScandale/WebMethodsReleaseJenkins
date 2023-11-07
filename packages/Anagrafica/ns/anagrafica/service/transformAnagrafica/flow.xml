@@ -6,7 +6,7 @@
   <!-- nodes -->
 
 <MAP TIMEOUT="" MODE="STANDALONE">
-  <COMMENT>test error handling n</COMMENT>
+  <COMMENT>testing pwsh</COMMENT>
 </MAP>
 
 <INVOKE TIMEOUT="" SERVICE="pub.flatFile:convertToString" VALIDATE-IN="$none" VALIDATE-OUT="$none">
