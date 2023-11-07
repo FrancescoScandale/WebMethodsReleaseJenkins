@@ -5,19 +5,12 @@
 $ENVIRONMENT= "PRD"
 $PROPERTIES_FILE_NAME = "devops.properties"
 $REPO = "WebMethodsPackages"
-
-#From the .properties file
 $COUNTRY = "MI"
 $date = Get-Date -UFormat '%Y%m%d%H'
-
-#cicd step
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + "_" + $date
-
-#useful variables
 $PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
 
-
-#BUILD
+#BUILD - PREPARATION
 #clean
 $BuildOutputDir = $PROPERTIES["build.output"]+"\$ENVIRONMENT"
 $BuildSourceDir = $PROPERTIES["build.source"]+"\$ENVIRONMENT"
@@ -31,15 +24,14 @@ if (Test-Path $BuildSourceDir\*) {
 }
 
 Write-Output "BUILD STAGE"
-#preconditions
 if($ENVIRONMENT -ne “PRD”){
 	Write-Output "$ENVIRONMENT error - environment not valid"
 	Throw Exception
 }
-
+#arguments
 $BuildScript = $PROPERTIES["build.script"]
 $Log = "$BuildOutputDir\$CICD_IDENTIFIER.log"
-
+#clone repo
 Write-Output "--COPY SOURCE INTO 'BUILD SOURCE DIRECTORY'--"
 Set-Location $BuildSourceDir
 git clone https://FrancescoScandale@github.com/FrancescoScandale/$REPO.git
@@ -73,6 +65,5 @@ if (-Not (Test-Path $BuildSourceDir)) {
 #END OF CHECKS
 $BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
 
-#fbuild
-#cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
+#BUILD
 Start-Process -FilePath $BuildScript -ArgumentList "-Dbuild.output.dir=$BuildOutputDir", "-Dbuild.source.dir=$BuildSourceDir2", "-Dbuild.log.fileName=$Log" -Wait

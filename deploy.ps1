@@ -4,23 +4,16 @@
 #INIT
 $ENVIRONMENT= "PRD"
 $PROPERTIES_FILE_NAME = "devops.properties"
-
-#From the .properties file
 $COUNTRY = "MI"
 $date = Get-Date -UFormat '%Y%m%d%H'
-
-#cicd step
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + "_" + $date
-
-#useful variables
 $PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
-$DeployerUser="Administrator" #this needs to be checked
-$DeployerPwd="manage" #this needs to be checked
+$DeployerUser="Administrator"
+$DeployerPwd="manage"
 
-
-#DEPLOY
+#DEPLOY - PREPARATION
 Write-Output "DEPLOY STAGE"
-#preconditions
+#project automator
 $DeployPathConfig = $PROPERTIES["deploy.config"] + "\$ENVIRONMENT" #path_config
 $UpdateAutomator = $PROPERTIES["deploy.update.automator"]
 $UpdateAutomator = $UpdateAutomator.replace('{{_COUNTRY_}}', "$COUNTRY")
@@ -59,6 +52,7 @@ if (-not (Test-Path -Path $DeployerBat)) {
   Throw "file $DeployerBat does NOT exist"
 }
 #END OF CHECKS
+#deployer arguments
 $ConfigProperties = "$DeployPathConfig\config.properties" #PROP_FILE
 $CDKeyvalue = Select-String -Path $ConfigProperties -pattern "candidate.name" -CaseSensitive
 $CDValue = $CDKeyvalue-split "="
@@ -102,15 +96,11 @@ if ($Port0 -eq '') {
 Write-Output "-----------------"
 #END OF CHECKS
 
+#PROJECT AUTOMATOR
 #update deployment_projectautomator
-#cmd.exe /c "$AntBat -f $UpdateAutomator"
 Start-Process -FilePath $AntBat -ArgumentList "-f", $UpdateAutomator -Wait
-
 #deployment objects creation
-#cmd.exe /c "$ProjectBat $ProjectAutomator $aLog"
 Start-Process -FilePath $ProjectBat -ArgumentList $ProjectAutomator, $aLog -Wait
 
-
-#packages deploy
-#cmd.exe /c "$DeployerBat --deploy -dc $Candidate -project $Project -host $Host0 -port $Port0 -user $DeployerUser -pwd $DeployerPwd $dLog"
+#DEPLOY
 Start-Process -FilePath $DeployerBat -ArgumentList "--deploy", "-dc", $Candidate, "-project", $Project, "-host", $Host0, "-port", $Port0, "-user", $DeployerUser, "-pwd", $DeployerPwd, $dLog -Wait
