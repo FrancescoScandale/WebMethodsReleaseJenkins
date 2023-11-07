@@ -1,3 +1,3 @@
 # WebMethodsPackages
 
-Template repo with WebMethods packages used for doing deployment tests.
+Template repo with WebMethods package Anagrafica used for doing deployment tests.
