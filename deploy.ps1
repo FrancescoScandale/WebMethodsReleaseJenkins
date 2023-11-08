@@ -99,11 +99,8 @@ Write-Output "-----------------"
 #PROJECT AUTOMATOR
 #update deployment_projectautomator
 cmd.exe /c "$AntBat -f $UpdateAutomator"
-#Start-Process -FilePath $AntBat -ArgumentList "-f", $UpdateAutomator -Wait
 #deployment objects creation
 cmd.exe /c "$ProjectBat $ProjectAutomator $aLog"
-#Start-Process -FilePath $ProjectBat -ArgumentList $ProjectAutomator, $aLog -Wait
 
 #DEPLOY
 cmd.exe /c "$DeployerBat --deploy -dc $Candidate -project $Project -host $Host0 -port $Port0 -user $DeployerUser -pwd $DeployerPwd $dLog"
-#Start-Process -FilePath $DeployerBat -ArgumentList "--deploy", "-dc", $Candidate, "-project", $Project, "-host", $Host0, "-port", $Port0, "-user", $DeployerUser, "-pwd", $DeployerPwd, $dLog -Wait

@@ -66,12 +66,4 @@ if (-Not (Test-Path $BuildSourceDir)) {
 $BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
 
 #BUILD
-#cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
-try {
-  #& "$BuildScript" -Dbuild.output.dir="$BuildOutputDir" -Dbuild.source.dir="$BuildSourceDir2" -Dbuild.log.fileName="$Log"
-  Start-Process -FilePath $BuildScript -ArgumentList "-Dbuild.output.dir=$BuildOutputDir", "-Dbuild.source.dir=$BuildSourceDir2", "-Dbuild.log.fileName=$Log" -Wait
-}
-catch {
-  write-host "ERROR DURING THE BUILD: $_"
-  exit 1
-}
+cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
