@@ -68,7 +68,7 @@ $BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
 #BUILD
 #cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"
 try {
-  Start-Process -FilePath $BuildScript -ArgumentList "-Dbuild.output.dir=$BuildOutputDir", "-Dbuild.source.dir=$BuildSourceDir2", "-Dbuild.log.fileName=$Log" -Wait
+  & $BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log
 }
 catch {
   write-host "ERROR DURING THE BUILD: $_"
