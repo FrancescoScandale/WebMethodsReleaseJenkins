@@ -54,7 +54,7 @@ if (-not (Test-Path -Path $DeployerBat)) {
 #END OF CHECKS
 #deployer arguments
 $ConfigFile = "$DeployPathConfig\config.properties"
-$ConfigProperties = ConvertFrom-StringData (Get-Content -Raw $ConfigFile)
+$ConfigProperties = ConvertFrom-StringData (Get-Content -Raw "$ConfigFile")
 $Candidate = $ConfigProperties["candidate.name"]
 $Project = $ConfigProperties["project.name"]
 $DeployerHost = $ConfigProperties["local.host"]
