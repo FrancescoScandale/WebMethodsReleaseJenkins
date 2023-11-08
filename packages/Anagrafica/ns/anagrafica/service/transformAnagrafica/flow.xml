@@ -6,14 +6,7 @@
   <!-- nodes -->
 
 <MAP TIMEOUT="" MODE="STANDALONE">
-  <COMMENT>testing full windows</COMMENT>
-</MAP>
-
-<INVOKE TIMEOUT="" SERVICE="pub.flatFile:convertToString" VALIDATE-IN="$none" VALIDATE-OUT="$none">
-  <COMMENT></COMMENT>
-
-  <!-- nodes -->
-
+  <COMMENT>testing full win</COMM
 <MAP MODE="INPUT">
   <MAPTARGET>
 
