@@ -2,13 +2,14 @@
 #SCRIPT TO BUILD A FULL RELEASE 
 
 #INIT
-$ENVIRONMENT= "PRD"
 $PROPERTIES_FILE_NAME = "devops.properties"
-$REPO = "WebMethodsPackages-MI"
-$COUNTRY = "MI"
+$PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
+$ENVIRONMENT= $PROPERTIES["environment"]
+$REPO = $PROPERTIES["repository"]
+$COUNTRY = $REPO -split "-"
+$COUNTRY = $COUNTRY[1]
 $date = Get-Date -UFormat '%Y%m%d%H'
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + "_" + $date
-$PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
 
 #BUILD - PREPARATION
 #clean
@@ -63,7 +64,7 @@ if (-Not (Test-Path $BuildSourceDir)) {
   Throw "The source directory doesn't exist"
 }
 #END OF CHECKS
-$BuildSourceDir2="$BuildSourceDir\$REPO" #SOURCE_DIR
+$BuildSourceDir2="$BuildSourceDir\$REPO"
 
 #BUILD
 cmd.exe /c "$BuildScript -Dbuild.output.dir=$BuildOutputDir -Dbuild.source.dir=$BuildSourceDir2 -Dbuild.log.fileName=$Log"

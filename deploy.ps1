@@ -2,19 +2,19 @@
 #SCRIPT TO DEPLOY A FULL RELEASE
 
 #INIT
-$ENVIRONMENT= "PRD"
 $PROPERTIES_FILE_NAME = "devops.properties"
-$COUNTRY = "MI"
+$PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
+$ENVIRONMENT= $PROPERTIES["environment"]
+$REPO = $PROPERTIES["repository"]
+$COUNTRY = $REPO -split "-"
+$COUNTRY = $COUNTRY[1]
 $date = Get-Date -UFormat '%Y%m%d%H'
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + "_" + $date
-$PROPERTIES = ConvertFrom-StringData (Get-Content -Raw "$PROPERTIES_FILE_NAME")
-$DeployerUser="Administrator"
-$DeployerPwd="manage"
 
 #DEPLOY - PREPARATION
 Write-Output "DEPLOY STAGE"
 #project automator
-$DeployPathConfig = $PROPERTIES["deploy.config"] + "\$ENVIRONMENT" #path_config
+$DeployPathConfig = $PROPERTIES["deploy.config"] + "\$ENVIRONMENT"
 $UpdateAutomator = $PROPERTIES["deploy.update.automator"]
 $UpdateAutomator = $UpdateAutomator.replace('{{_COUNTRY_}}', "$COUNTRY")
 $UpdateAutomator = $UpdateAutomator.replace('{{_ENV_}}', "$ENVIRONMENT")
@@ -53,26 +53,17 @@ if (-not (Test-Path -Path $DeployerBat)) {
 }
 #END OF CHECKS
 #deployer arguments
-$ConfigProperties = "$DeployPathConfig\config.properties" #PROP_FILE
-$CDKeyvalue = Select-String -Path $ConfigProperties -pattern "candidate.name" -CaseSensitive
-$CDValue = $CDKeyvalue-split "="
-$Candidate = $CDValue[1].Trim()
-$ProjectKeyvalue = Select-String -Path $ConfigProperties -pattern "project.name" -CaseSensitive
-$ProjectValue = $ProjectKeyvalue -split "="
-$Project = $ProjectValue[1].Trim()
-$HostKeyvalue = Select-String -Path $ConfigProperties -pattern "local.host" -CaseSensitive
-$HostValue = $HostKeyvalue -split "="
-$Host0 = $HostValue[1].Trim()
-$PortKeyvalue = Select-String -Path $ConfigProperties -pattern "local.port" -CaseSensitive
-$PortValue = $PortKeyvalue -split "="
-$Port0 = $PortValue[1].Trim()
+$ConfigFile = "$DeployPathConfig\config.properties"
+$ConfigProperties = ConvertFrom-StringData (Get-Content -Raw $ConfigFile)
+$Candidate = $ConfigProperties["candidate.name"]
+$Project = $ConfigProperties["project.name"]
+$DeployerHost = $ConfigProperties["local.host"]
+$DeployerPort = $ConfigProperties["local.port"]
+$DeployerUser = $ConfigProperties["local.user"]
+$DeployerPwd = $ConfigProperties["local.pwd"]
 #CHECKS
 Write-Output "PROPERTIES CHECK"
 Write-Output "-----------------"
-if (-not (Test-Path -Path $ConfigProperties)) {
-  Write-Output "Error: The file '$ConfigProperties' does NOT exist."
-  Throw "The file '$ConfigProperties' does NOT exist"
-}
 Write-Output "---CANDIDATE NAME---"
 if ($Candidate -eq '') {
   Write-Output "Error: The 'candidate.name' property is blank."
@@ -84,14 +75,24 @@ if ($Project -eq '') {
   Throw "The 'project.name' property is blank"
 }
 Write-Output "---HOST---"
-if ($Host0 -eq '') {
+if ($DeployerHost -eq '') {
   Write-Output "Error: The 'local.host' property is blank."
   Throw "The 'local.host' property is blank"
 }
 Write-Output "---PORT---"
-if ($Port0 -eq '') {
+if ($DeployerPort -eq '') {
   Write-Output "Error: The 'local.port' property is blank."
   Throw "The 'local.port' property is blank"
+}
+Write-Output "---USER---"
+if ($DeployerUser -eq '') {
+  Write-Output "Error: The 'local.user' property is blank."
+  Throw "The 'local.user' property is blank"
+}
+Write-Output "---PWD---"
+if ($DeployerPwd -eq '') {
+  Write-Output "Error: The 'local.pwd' property is blank."
+  Throw "The 'local.pwd' property is blank"
 }
 Write-Output "-----------------"
 #END OF CHECKS
@@ -103,4 +104,4 @@ cmd.exe /c "$AntBat -f $UpdateAutomator"
 cmd.exe /c "$ProjectBat $ProjectAutomator $aLog"
 
 #DEPLOY
-cmd.exe /c "$DeployerBat --deploy -dc $Candidate -project $Project -host $Host0 -port $Port0 -user $DeployerUser -pwd $DeployerPwd $dLog"
+cmd.exe /c "$DeployerBat --deploy -dc $Candidate -project $Project -host $DeployerHost -port $DeployerPort -user $DeployerUser -pwd $DeployerPwd $dLog"
