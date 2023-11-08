@@ -4,7 +4,7 @@
 #INIT
 $ENVIRONMENT= "PRD"
 $PROPERTIES_FILE_NAME = "devops.properties"
-$REPO = "WebMethodsPackages"
+$REPO = "WebMethodsPackages-MI"
 $COUNTRY = "MI"
 $date = Get-Date -UFormat '%Y%m%d%H'
 $CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + "_" + $date
