@@ -9,7 +9,7 @@ $REPO = $PROPERTIES["repository"]
 $COUNTRY = $REPO -split "-"
 $COUNTRY = $COUNTRY[1]
 $date = Get-Date -UFormat '%Y%m%d%H'
-$CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + "_" + $date
+$CICD_IDENTIFIER = $COUNTRY + "_" + $ENVIRONMENT + "_" + $date
 
 #DEPLOY - PREPARATION
 Write-Output "DEPLOY STAGE"
