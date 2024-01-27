@@ -1,4 +1,5 @@
 def FAILED_STAGE
+def EMAIL = 'test@mail.com'
 
 pipeline {
     agent {
@@ -44,7 +45,7 @@ pipeline {
         failure {
             script {
                 echo 'SENDING EMAIL NOTIFICATION ABOUT FAILURE'
-                mail body: "Jenkins ${FAILED_STAGE} step has failed. Check the logs for further details.", subject: "Jenkins ${FAILED_STAGE} FAILED", to: 'frascan@hotmail.it'
+                mail body: "Jenkins ${FAILED_STAGE} step has failed. Check the logs for further details.", subject: "Jenkins ${FAILED_STAGE} FAILED", to: ${EMAIL}
             }
         }
     }
